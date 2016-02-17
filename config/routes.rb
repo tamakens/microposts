@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post   'login' , to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
  
+ #resources :users, except: [:index, :new]
  resources :users
  resources :sessions, only: [:new, :create, :destroy]
 end
