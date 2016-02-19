@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update]
-  #before_action :compare_user, only: [:edit, :update]
+  before_action :compare_user, only: [:edit, :update]
 
   def show # 追加
    @user = User.find(params[:id])
@@ -21,9 +21,9 @@ class UsersController < ApplicationController
   end
   
   def compare_user
-     if current_user == @user
+    if current_user == @user
       # 保存に成功した場合は編集ページへリダイレクト
-      redirect_to 'edit'
+      # redirect_to 'edit'
     else
      flash[:alert] = "他人のプロフィールは編集できません！"
      redirect_to root_path
@@ -47,12 +47,12 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,
-    :password_confirmation,:region)
+    params.require(:user).permit(:name, :email, :password,:password_confirmation,:region)
   end
-  
-  
+
   def set_user
     @user = User.find(params[:id])
   end
+
+
 end
