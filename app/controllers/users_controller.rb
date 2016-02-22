@@ -19,16 +19,6 @@ class UsersController < ApplicationController
       render 'new'
     end
   end
-  
-  def compare_user
-    if current_user == @user
-      # 保存に成功した場合は編集ページへリダイレクト
-      # redirect_to 'edit'
-    else
-     flash[:alert] = "他人のプロフィールは編集できません！"
-     redirect_to root_path
-    end
-  end
 
   def edit #編集
   end
@@ -53,6 +43,12 @@ class UsersController < ApplicationController
   def set_user
     @user = User.find(params[:id])
   end
-
+  
+  def compare_user
+    if current_user != @user
+     flash[:alert] = "他人のプロフィールは編集できません！"
+     redirect_to root_path
+    end
+  end
 
 end
