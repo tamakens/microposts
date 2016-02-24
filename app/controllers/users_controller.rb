@@ -1,15 +1,17 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:edit, :update]
-  before_action :compare_user, only: [:edit, :update]
+  before_action :set_user, only: [:show, :edit, :update]
+  before_action :logged_in_user, only: [:show, :edit, :update]
+  before_action :authenticate!, only: [:edit, :update]
 
-  def show # 追加
-   @user = User.find(params[:id])
+  def show
+    @user = User.find(params[:id])
+    #@microposts = @user.microposts.order(created_at: :desc)
   end
   
   def new
-        @user = User.new
+    @user = User.new
   end
-  
+
   def create
     @user = User.new(user_params)
     if @user.save
@@ -20,35 +22,45 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit #編集
+  def edit
   end
-  
+
   def update
     if @user.update(user_params)
-      # 保存に成功した場合はトップページへリダイレクト
-      flash[:success] = "プロフィールを編集しました"
-      redirect_to root_path
+      flash[:success] = "修正しました！"
+      redirect_to @user
     else
-      # 保存に失敗した場合は編集画面へ戻す
       render 'edit'
     end
+  end
+  
+  def followings
+    @user = User.find(params[:follow_id])
+  end
+  
+  def followers
+    @user = User.find(params[:followed_id])
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email, :password,:password_confirmation,:region)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def user_profile
+    params.require(:user).permit(:name, :email, :profile, :area, :birthday, :password, :password_confirmation)
   end
 
   def set_user
     @user = User.find(params[:id])
   end
-  
-  def compare_user
-    if current_user != @user
-     flash[:alert] = "他人のプロフィールは編集できません！"
-     redirect_to root_path
+
+  def authenticate!
+    if @user != current_user
+      redirect_to root_url, flash: { dander: "不正なアクセス" }
     end
   end
 
 end
+
