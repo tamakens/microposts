@@ -58,7 +58,7 @@ class UsersController < ApplicationController
 
   def authenticate!
     if @user != current_user
-      redirect_to root_url, flash: { dander: "不正なアクセス" }
+      redirect_to root_url, flash: { danger: "不正なアクセス" }
     end
   end
 
