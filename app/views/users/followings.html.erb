@@ -1,9 +1,10 @@
 <h1>フォロー中</h1>
 
-<%= render '/layouts/header' %>
+<%#= render '/layouts/header' # ここはコメントアウト%>
 
-<%= @user.name %>
-
-<% @follower.each do |follower| %>
-  <%= follower.name %>
+<% if !@follower.nil? %>
+    <% @followings.each do |following| %>
+        <%= gravatar_for following %>
+        <%= following.name %>
+    <% end %>
 <% end %>
