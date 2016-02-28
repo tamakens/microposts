@@ -5,7 +5,6 @@ class User < ActiveRecord::Base
   validates :email, presence: true, length: { maximum: 255 },
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
-<<<<<<< HEAD
 
   has_secure_password
 
@@ -29,8 +28,4 @@ class User < ActiveRecord::Base
   def following?(other_user)
     following_users.include?(other_user)
   end
-=======
-    has_secure_password
-    has_many :microposts
->>>>>>> parent of b2d2c83... follow
 end
