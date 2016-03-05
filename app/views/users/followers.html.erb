@@ -3,8 +3,8 @@
 <%# render '/layouts/header' # ここはコメントアウト %>
 
 <% if !@follower.nil? %>
-  <% @followers.each do |followeds| %>
-    <%= gravatar_for followed %>
-    <%= followed.name %>
+  <% @followers.each do |followers| %>
+    <%= gravatar_for follower %>
+    <%= follower.name %>
   <% end %>
 <% end %>
