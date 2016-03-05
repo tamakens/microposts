@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :followings, :followers]
-  before_action :logged_in_user, only: [:show, :edit, :update, :followingsl, :followers]
+  before_action :logged_in_user, only: [:show, :edit, :update, :followings, :followers]
   before_action :authenticate!, only: [:edit, :update]
 
   def show
@@ -37,12 +37,12 @@ class UsersController < ApplicationController
   def followings
     @user = User.find(params[:id])
       #フォローしているユーザー
-    @following　= @user.following_users
+    @follower　= @user.following_users
   end
   
   def followers
     @user = User.find(params[:id])
-    @followed = @user.followed_users
+    @followed = @user.follower_users
   end
 
   private
