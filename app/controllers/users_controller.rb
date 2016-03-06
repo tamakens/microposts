@@ -33,22 +33,23 @@ class UsersController < ApplicationController
       render 'edit'
     end
   end
-  
+
+  #フォローしているユーザー
   def followings
-    @user = User.find(params[:id])
-      #フォローしているユーザー
-    @follower　= @user.following_users
+    #@user = User.find(params[:id])
+    @follower = @user.following_users
   end
-  
+
+  #フォローされているユーザー
   def followers
-    @user = User.find(params[:id])
-    @followed = @user.follower_users
+    #@user = User.find(params[:id])
+    @followed = @user.followed_users
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:name, :email,:password, :password_confirmation)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
   def user_profile
