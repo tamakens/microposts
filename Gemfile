@@ -47,3 +47,6 @@ group :development do
   gem 'spring'
 end
 
+group :development, :test do
+  gem 'pry-rails'  # rails console(もしくは、rails c)でirbの代わりにpryを使われる
+end
